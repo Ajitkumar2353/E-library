@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Odisha eBook Library</title>
@@ -8,7 +8,7 @@
 <style>
 body{
   margin:0;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   background:#f2f4f8;
 }
 header{
@@ -24,6 +24,7 @@ header input{
   border:none;
   border-radius:5px;
   margin-top:10px;
+  font-size:16px;
 }
 .book-container{
   display:grid;
@@ -35,16 +36,22 @@ header input{
   background:white;
   border-radius:8px;
   box-shadow:0 2px 6px rgba(0,0,0,0.15);
-}
-.book-card a{
-  display:block;
-  padding:12px;
+  padding:10px;
   text-align:center;
-  text-decoration:none;
-  color:#000;
+}
+.book-card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:5px;
 }
 .book-card h3{
   font-size:14px;
+  margin:10px 0 0;
+  color:#333;
+}
+.book-card a{
+  text-decoration:none;
 }
 </style>
 </head>
@@ -56,26 +63,19 @@ header input{
   <input type="text" id="searchInput" placeholder="Search">
 </header>
 
-<div class="book-container">
+<div class="book-container" id="bookList">
 
-  <!-- BOOK 1 -->
   <div class="book-card">
-    <a href="viewer.html?id=FILE_ID_1">
-      <h3>+2 Physics Complete Notes</h3>
+    <a href="https://drive.google.com/file/d/FILE_ID_1/preview" target="_blank">
+      <img src="https://drive.google.com/thumbnail?id=FILE_ID_1&sz=w400">
+      <h3>+2 Physics Complete Notes (Odia)</h3>
     </a>
   </div>
 
-  <!-- BOOK 2 -->
   <div class="book-card">
-    <a href="https://drive.google.com/file/d/19BE_EDfd29cykSyES9ZyZ_kv87rcnoPA/view?usp=drivesdk">
-      <h3> Computer Notes</h3>
-    </a>
-  </div>
-
-  <!-- BOOK 3 -->
-  <div class="book-card">
-    <a href="viewer.html?id=FILE_ID_3">
-      <h3>Biology (Botany + Zoology)</h3>
+    <a href="https://drive.google.com/file/d/FILE_ID_2/preview" target="_blank">
+      <img src="https://drive.google.com/thumbnail?id=FILE_ID_2&sz=w400">
+      <h3>Biology (Botany + Zoology) PDF</h3>
     </a>
   </div>
 
@@ -85,9 +85,9 @@ header input{
 const searchInput = document.getElementById("searchInput");
 const books = document.querySelectorAll(".book-card");
 
-searchInput.addEventListener("keyup", ()=>{
+searchInput.addEventListener("keyup", () => {
   let value = searchInput.value.toLowerCase();
-  books.forEach(book=>{
+  books.forEach(book => {
     book.style.display = book.innerText.toLowerCase().includes(value)
       ? "block" : "none";
   });
