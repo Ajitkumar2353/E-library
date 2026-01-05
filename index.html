@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Odisha eBook Library</title>
@@ -8,7 +8,7 @@
 <style>
 body{
   margin:0;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
   background:#f2f4f8;
 }
 header{
@@ -24,7 +24,6 @@ header input{
   border:none;
   border-radius:5px;
   margin-top:10px;
-  font-size:16px;
 }
 .book-container{
   display:grid;
@@ -36,16 +35,16 @@ header input{
   background:white;
   border-radius:8px;
   box-shadow:0 2px 6px rgba(0,0,0,0.15);
+}
+.book-card a{
+  display:block;
   padding:12px;
   text-align:center;
+  text-decoration:none;
+  color:#000;
 }
 .book-card h3{
   font-size:14px;
-  color:#333;
-}
-.book-card a{
-  text-decoration:none;
-  color:inherit;
 }
 </style>
 </head>
@@ -57,27 +56,26 @@ header input{
   <input type="text" id="searchInput" placeholder="Search">
 </header>
 
-<div class="book-container" id="bookList">
+<div class="book-container">
 
   <!-- BOOK 1 -->
   <div class="book-card">
     <a href="viewer.html?id=FILE_ID_1">
-      <h3> computer Complete Notes (Odia)</h3>
+      <h3>+2 Physics Complete Notes</h3>
     </a>
-    src="https://drive.google.com/file/d/19BE_EDfd29cykSyES9ZyZ_kv87rcnoPA/view?usp=drivesdk">
   </div>
 
   <!-- BOOK 2 -->
   <div class="book-card">
-    <a href="viewer.html?id=FILE_ID_2">
-      <h3>Biology (Botany + Zoology)</h3>
+    <a href="https://drive.google.com/file/d/19BE_EDfd29cykSyES9ZyZ_kv87rcnoPA/view?usp=drivesdk">
+      <h3> Computer Notes</h3>
     </a>
   </div>
 
   <!-- BOOK 3 -->
   <div class="book-card">
     <a href="viewer.html?id=FILE_ID_3">
-      <h3>OSSSC Exam General Science PDF</h3>
+      <h3>Biology (Botany + Zoology)</h3>
     </a>
   </div>
 
@@ -87,9 +85,9 @@ header input{
 const searchInput = document.getElementById("searchInput");
 const books = document.querySelectorAll(".book-card");
 
-searchInput.addEventListener("keyup", () => {
+searchInput.addEventListener("keyup", ()=>{
   let value = searchInput.value.toLowerCase();
-  books.forEach(book => {
+  books.forEach(book=>{
     book.style.display = book.innerText.toLowerCase().includes(value)
       ? "block" : "none";
   });
