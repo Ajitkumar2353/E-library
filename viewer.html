@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PDF Viewer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+}
+.top-bar{
+  background:#1a73e8;
+  color:white;
+  padding:10px;
+  text-align:center;
+}
+iframe{
+  width:100%;
+  height:calc(100vh - 50px);
+  border:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-bar">
+  <a href="index.html" style="color:white;text-decoration:none;">⬅ Back</a>
+</div>
+
+<iframe id="pdfFrame"></iframe>
+
+<script>
+// Get FILE_ID from URL
+const params = new URLSearchParams(window.location.search);
+const fileId = params.get("id");
+
+// Load PDF in Drive Viewer
+if(fileId){
+  document.getElementById("pdfFrame").src =
+    "https://drive.google.com/file/d/" + fileId + "/preview";
+}else{
+  document.body.innerHTML = "PDF not found";
+}
+</script>
+
+</body>
+</html>
