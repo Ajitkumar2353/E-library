@@ -36,22 +36,16 @@ header input{
   background:white;
   border-radius:8px;
   box-shadow:0 2px 6px rgba(0,0,0,0.15);
-  padding:10px;
+  padding:12px;
   text-align:center;
-}
-.book-card img{
-  width:100%;
-  height:220px;
-  object-fit:cover;
-  border-radius:5px;
 }
 .book-card h3{
   font-size:14px;
-  margin:10px 0 0;
   color:#333;
 }
 .book-card a{
   text-decoration:none;
+  color:inherit;
 }
 </style>
 </head>
@@ -65,17 +59,25 @@ header input{
 
 <div class="book-container" id="bookList">
 
+  <!-- BOOK 1 -->
   <div class="book-card">
-    <a href="https://drive.google.com/file/d/19BE_EDfd29cykSyES9ZyZ_kv87rcnoPA/view?usp=drivesdk" target="_blank">
-      <img src="https://drive.google.com/thumbnail?id=FILE_ID_1&sz=w400">
-      <h3>+2 Computer Complete Notes (English)</h3>
+    <a href="viewer.html?id=FILE_ID_1">
+      <h3> computer Complete Notes (Odia)</h3>
+    </a>
+    src="https://drive.google.com/file/d/19BE_EDfd29cykSyES9ZyZ_kv87rcnoPA/view?usp=drivesdk">
+  </div>
+
+  <!-- BOOK 2 -->
+  <div class="book-card">
+    <a href="viewer.html?id=FILE_ID_2">
+      <h3>Biology (Botany + Zoology)</h3>
     </a>
   </div>
 
+  <!-- BOOK 3 -->
   <div class="book-card">
-    <a href="https://drive.google.com/file/d/FILE_ID_2/preview" target="_blank">
-      <img src="https://drive.google.com/thumbnail?id=FILE_ID_2&sz=w400">
-      <h3>Biology (Botany + Zoology) PDF</h3>
+    <a href="viewer.html?id=FILE_ID_3">
+      <h3>OSSSC Exam General Science PDF</h3>
     </a>
   </div>
 
@@ -95,4 +97,4 @@ searchInput.addEventListener("keyup", () => {
 </script>
 
 </body>
-  </html>
+</html>
