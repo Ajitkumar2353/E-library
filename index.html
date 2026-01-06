@@ -2,82 +2,57 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>PDF Viewer</title>
+<title>Odisha eBook Library</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{margin:0;}
-.top{
-  background:#1a73e8;
-  color:white;
-  padding:8px;
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
-.top button{
-  padding:6px 10px;
-  border:none;
-  border-radius:4px;
-  cursor:pointer;
-}
-.viewer-wrap{
-  width:100%;
-  height:calc(100vh - 50px);
-  overflow:auto;
-}
-iframe{
-  width:100%;
-  height:100%;
-  border:none;
-  transform-origin: 0 0;
-}
+body{margin:0;font-family:Arial;background:#f2f4f8;}
+header{background:#1a73e8;color:#fff;text-align:center;padding:15px;}
+header input{width:90%;max-width:400px;padding:10px;border:none;border-radius:5px;margin-top:10px;}
+.book-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:15px;padding:15px;}
+.book-card{background:#fff;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.15);padding:10px;text-align:center;cursor:pointer;}
+.book-card img{width:100%;height:220px;object-fit:cover;border-radius:5px;}
+.book-card h3{font-size:14px;margin:10px 0 0;color:#333;}
 </style>
 </head>
 
 <body>
 
-<div class="top">
-  <button onclick="zoomOut()">➖</button>
-  <button onclick="zoomIn()">➕</button>
-  <button onclick="refreshPDF()">🔄</button>
-  <button onclick="goBack()">⬅ Back</button>
-</div>
+<header>
+  <h2>📚 Odisha eBook Library</h2>
+  <input type="text" id="searchInput" placeholder="Search">
+</header>
 
-<div class="viewer-wrap">
-  <iframe id="pdfFrame"></iframe>
+<div class="book-container">
+
+  <div class="book-card" onclick="openPDF('19BE_EDfd29cykSyES9ZyZ_kv87rcnoPA')">
+    <img src="images/Screenshot_20260105-082011.png">
+    <h3>Computer Book (English)</h3>
+  </div>
+
+  <div class="book-card" onclick="openPDF('1EKNQHuEeSHUy2ixw2yqpZN0wqzW4yzKa')">
+    <img src="images/Screenshot_20260105-083928.png">
+    <h3>General Knowledge PDF</h3>
+  </div>
+
 </div>
 
 <script>
-const params=new URLSearchParams(window.location.search);
-const id=params.get("id");
-
-const frame=document.getElementById("pdfFrame");
-let scale=1;
-
-if(id){
-  frame.src="https://drive.google.com/file/d/"+id+"/preview";
+function openPDF(id){
+  window.open(
+    "https://drive.google.com/file/d/"+id+"/view",
+    "_blank"
+  );
 }
 
-function zoomIn(){
-  scale+=0.1;
-  frame.style.transform="scale("+scale+")";
-}
-
-function zoomOut(){
-  if(scale>0.6){
-    scale-=0.1;
-    frame.style.transform="scale("+scale+")";
-  }
-}
-
-function refreshPDF(){
-  frame.src = frame.src;
-}
-
-function goBack(){
-  window.location.href="index.html";
-}
+const searchInput=document.getElementById("searchInput");
+const books=document.querySelectorAll(".book-card");
+searchInput.addEventListener("keyup",()=>{
+  let v=searchInput.value.toLowerCase();
+  books.forEach(b=>{
+    b.style.display=b.innerText.toLowerCase().includes(v)?"block":"none";
+  });
+});
 </script>
 
 </body>
