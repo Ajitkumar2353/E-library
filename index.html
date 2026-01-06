@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,54 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{
-  margin:0;
-  font-family: Arial, sans-serif;
-  background:#f2f4f8;
-}
-header{
-  background:#1a73e8;
-  color:white;
-  text-align:center;
-  padding:15px;
-}
-header input{
-  width:90%;
-  max-width:400px;
-  padding:10px;
-  border:none;
-  border-radius:5px;
-  margin-top:10px;
-  font-size:16px;
-}
-.book-container{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:15px;
-  padding:15px;
-}
-.book-card{
-  background:white;
-  border-radius:8px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.15);
-  padding:10px;
-  text-align:center;
-}
-.book-card img{
-  width:100%;
-  height:220px;
-  object-fit:cover;
-  border-radius:5px;
-}
-.book-card h3{
-  font-size:14px;
-  margin:10px 0 0;
-  color:#333;
-}
-.book-card a{
-  text-decoration:none;
-  color:inherit;
-}
+body{margin:0;font-family:Arial,sans-serif;background:#f2f4f8;}
+header{background:#1a73e8;color:white;text-align:center;padding:15px;}
+header input{width:90%;max-width:400px;padding:10px;border:none;border-radius:5px;margin-top:10px;font-size:16px;}
+.book-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:15px;padding:15px;}
+.book-card{background:white;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.15);padding:10px;text-align:center;}
+.book-card img{width:100%;height:220px;object-fit:cover;border-radius:5px;}
+.book-card h3{font-size:14px;margin:10px 0 0;color:#333;}
+.book-card a{text-decoration:none;color:inherit;}
 </style>
 </head>
 
@@ -65,62 +24,65 @@ header input{
   <input type="text" id="searchInput" placeholder="Search">
 </header>
 
-<div class="book-container" id="bookList">
+<div class="book-container">
 
   <!-- BOOK 1 -->
   <div class="book-card">
-    <a href="viewer.html?id=19BE_EDfd29cykSyES9ZyZ_kv87rcnoPA">
-      <img src="images/Screenshot_20260105-082011.png" alt="Computer Notes">
-      <h3>Computer Book(English)</h3>
+    <a href="https://drive.google.com/file/d/19BE_EDfd29cykSyES9ZyZ_kv87rcnoPA/view" target="_blank">
+      <img src="images/Screenshot_20260105-082011.png">
+      <h3>Computer Book (English)</h3>
     </a>
   </div>
 
   <!-- BOOK 2 -->
   <div class="book-card">
-  <a href="viewer.html?id=1EKNQHuEeSHUy2ixw2yqpZN0wqzW4yzKa">
-    <img src="images/Screenshot_20260105-083928.png" alt="General Knowledge">
-    <h3>General Knowledge PDF</h3>
-  </a>
+    <a href="https://drive.google.com/file/d/1EKNQHuEeSHUy2ixw2yqpZN0wqzW4yzKa/view" target="_blank">
+      <img src="images/Screenshot_20260105-083928.png">
+      <h3>General Knowledge PDF</h3>
+    </a>
   </div>
-<!-- BOOK 3 -->
+
+  <!-- BOOK 3 -->
   <div class="book-card">
-  <a href="viewer.html?id=1581X3qP6X5DEIp6T91fZSdYICxbrrHAM">
-    <img src="images/Screenshot_20260105-100922.png" alt="Malika odia">
-    <h3>Malika odia PDF</h3>
-  </a>
+    <a href="https://drive.google.com/file/d/1581X3qP6X5DEIp6T91fZSdYICxbrrHAM/view" target="_blank">
+      <img src="images/Screenshot_20260105-100922.png">
+      <h3>Malika Odia PDF</h3>
+    </a>
   </div>
+
   <!-- BOOK 4 -->
   <div class="book-card">
-  <a href="viewer.html?id=1EyV-icDqeNHWUyf81QCJJHqqXfnPq_W2">
-    <img src="images/Screenshot_20260105-102657.png" alt="computer aptitude">
-    <h3>computer aptitude PDF</h3>
-  </a>
+    <a href="https://drive.google.com/file/d/1EyV-icDqeNHWUyf81QCJJHqqXfnPq_W2/view" target="_blank">
+      <img src="images/Screenshot_20260105-102657.png">
+      <h3>Computer Aptitude PDF</h3>
+    </a>
   </div>
-    <!-- BOOK 5 -->
+
+  <!-- BOOK 5 -->
   <div class="book-card">
-  <a href="viewer.html?id=15HSLtYIvahpcmuqKoVgE7pJP5e6jqybz">
-    <img src="images/Screenshot_20260105-131548.png" alt="Barnabodha odia">
-    <h3>Barnabodha odia PDF</h3>
-  </a>
+    <a href="https://drive.google.com/file/d/15HSLtYIvahpcmuqKoVgE7pJP5e6jqybz/view" target="_blank">
+      <img src="images/Screenshot_20260105-131548.png">
+      <h3>Barnabodha Odia PDF</h3>
+    </a>
   </div>
-      <!-- BOOK 6 -->
+
+  <!-- BOOK 6 -->
   <div class="book-card">
-  <a href="viewer.html?id=16mYn_i1C5DVr2U0vyOkbSOoqEc8dr46T">
-    <img src="images/Screenshot_20260105-134336.png" alt="Tense chart">
-    <h3>Tense chart PDF</h3>
-  </a>
+    <a href="https://drive.google.com/file/d/16mYn_i1C5DVr2U0vyOkbSOoqEc8dr46T/view" target="_blank">
+      <img src="images/Screenshot_20260105-134336.png">
+      <h3>Tense Chart PDF</h3>
+    </a>
   </div>
+
 </div>
 
 <script>
-const searchInput = document.getElementById("searchInput");
-const books = document.querySelectorAll(".book-card");
-
-searchInput.addEventListener("keyup", () => {
-  let value = searchInput.value.toLowerCase();
-  books.forEach(book => {
-    book.style.display = book.innerText.toLowerCase().includes(value)
-      ? "block" : "none";
+const searchInput=document.getElementById("searchInput");
+const books=document.querySelectorAll(".book-card");
+searchInput.addEventListener("keyup",()=>{
+  let value=searchInput.value.toLowerCase();
+  books.forEach(book=>{
+    book.style.display=book.innerText.toLowerCase().includes(value)?"block":"none";
   });
 });
 </script>
