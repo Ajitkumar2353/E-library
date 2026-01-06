@@ -6,54 +6,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{
-  margin:0;
-  font-family: Arial, sans-serif;
-  background:#f2f4f8;
+body{margin:0;font-family:Arial;background:#f2f4f8;}
+header{background:#1a73e8;color:#fff;text-align:center;padding:12px;}
+header input{width:90%;max-width:400px;padding:10px;border:none;border-radius:5px;margin-top:8px;}
+.book-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:15px;padding:15px;}
+.book-card{background:#fff;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.15);padding:10px;text-align:center;cursor:pointer;}
+.book-card img{width:100%;height:220px;object-fit:cover;border-radius:5px;}
+.book-card h3{font-size:14px;margin:10px 0 0;color:#333;}
+
+#viewer{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#fff;
+  z-index:999;
 }
-header{
+.toolbar{
   background:#1a73e8;
-  color:white;
-  text-align:center;
-  padding:15px;
+  color:#fff;
+  padding:8px;
+  display:flex;
+  gap:10px;
 }
-header input{
-  width:90%;
-  max-width:400px;
-  padding:10px;
+.toolbar button{
+  padding:6px 10px;
   border:none;
-  border-radius:5px;
-  margin-top:10px;
-  font-size:16px;
+  border-radius:4px;
+  cursor:pointer;
 }
-.book-container{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:15px;
-  padding:15px;
+#pdf-container{
+  height:calc(100vh - 45px);
+  overflow:auto;
+  background:#ccc;
 }
-.book-card{
-  background:white;
-  border-radius:8px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.15);
-  padding:10px;
-  text-align:center;
-}
-.book-card img{
-  width:100%;
-  height:220px;
-  object-fit:cover;
-  border-radius:5px;
-}
-.book-card h3{
-  font-size:14px;
-  margin:10px 0 0;
-  color:#333;
-}
-.book-card a{
-  text-decoration:none;
-  color:inherit;
-}
+canvas{display:block;margin:10px auto;background:#fff;}
 </style>
 </head>
 
@@ -64,69 +50,87 @@ header input{
   <input type="text" id="searchInput" placeholder="Search">
 </header>
 
-<div class="book-container">
+<!-- 📚 BOOK LIST -->
+<div class="book-container" id="bookList">
 
-  <!-- BOOK 1 -->
-  <div class="book-card">
-    <a href="viewer.html?id=19BE_EDfd29cykSyES9ZyZ_kv87rcnoPA">
-      <img src="images/Screenshot_20260105-082011.png">
-      <h3>Computer Book (English)</h3>
-    </a>
+  <div class="book-card" onclick="openPDF('19BE_EDfd29cykSyES9ZyZ_kv87rcnoPA')">
+    <img src="images/Screenshot_20260105-082011.png">
+    <h3>Computer Book (English)</h3>
   </div>
 
-  <!-- BOOK 2 -->
-  <div class="book-card">
-    <a href="viewer.html?id=1EKNQHuEeSHUy2ixw2yqpZN0wqzW4yzKa">
-      <img src="images/Screenshot_20260105-083928.png">
-      <h3>General Knowledge PDF</h3>
-    </a>
+  <div class="book-card" onclick="openPDF('1EKNQHuEeSHUy2ixw2yqpZN0wqzW4yzKa')">
+    <img src="images/Screenshot_20260105-083928.png">
+    <h3>General Knowledge PDF</h3>
   </div>
 
-  <!-- BOOK 3 -->
-  <div class="book-card">
-    <a href="viewer.html?id=1581X3qP6X5DEIp6T91fZSdYICxbrrHAM">
-      <img src="images/Screenshot_20260105-100922.png">
-      <h3>Malika Odia PDF</h3>
-    </a>
-  </div>
-
-  <!-- BOOK 4 -->
-  <div class="book-card">
-    <a href="viewer.html?id=1EyV-icDqeNHWUyf81QCJJHqqXfnPq_W2">
-      <img src="images/Screenshot_20260105-102657.png">
-      <h3>Computer Aptitude PDF</h3>
-    </a>
-  </div>
-
-  <!-- BOOK 5 -->
-  <div class="book-card">
-    <a href="viewer.html?id=15HSLtYIvahpcmuqKoVgE7pJP5e6jqybz">
-      <img src="images/Screenshot_20260105-131548.png">
-      <h3>Barnabodha Odia PDF</h3>
-    </a>
-  </div>
-
-  <!-- BOOK 6 -->
-  <div class="book-card">
-    <a href="viewer.html?id=16mYn_i1C5DVr2U0vyOkbSOoqEc8dr46T">
-      <img src="images/Screenshot_20260105-134336.png">
-      <h3>Tense Chart PDF</h3>
-    </a>
+  <div class="book-card" onclick="openPDF('1581X3qP6X5DEIp6T91fZSdYICxbrrHAM')">
+    <img src="images/Screenshot_20260105-100922.png">
+    <h3>Malika Odia PDF</h3>
   </div>
 
 </div>
 
-<script>
-const searchInput = document.getElementById("searchInput");
-const books = document.querySelectorAll(".book-card");
+<!-- 📄 PDF VIEWER -->
+<div id="viewer">
+  <div class="toolbar">
+    <button onclick="zoomOut()">➖</button>
+    <button onclick="zoomIn()">➕</button>
+    <button onclick="closeViewer()">⬅ Back</button>
+  </div>
+  <div id="pdf-container"></div>
+</div>
 
-searchInput.addEventListener("keyup", () => {
-  let value = searchInput.value.toLowerCase();
-  books.forEach(book => {
-    book.style.display = book.innerText.toLowerCase().includes(value)
-      ? "block" : "none";
+<!-- 🔍 SEARCH -->
+<script>
+const searchInput=document.getElementById("searchInput");
+const books=document.querySelectorAll(".book-card");
+searchInput.addEventListener("keyup",()=>{
+  let v=searchInput.value.toLowerCase();
+  books.forEach(b=>{
+    b.style.display=b.innerText.toLowerCase().includes(v)?"block":"none";
   });
 });
+</script>
+
+<!-- PDF.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+let pdfDoc=null, scale=1.2;
+const container=document.getElementById("pdf-container");
+
+function openPDF(fileId){
+  document.getElementById("viewer").style.display="block";
+  const url="https://drive.google.com/uc?export=download&id="+fileId;
+  pdfjsLib.getDocument(url).promise.then(pdf=>{
+    pdfDoc=pdf;
+    renderPages();
+  });
+}
+
+function renderPages(){
+  container.innerHTML="";
+  for(let i=1;i<=pdfDoc.numPages;i++){
+    pdfDoc.getPage(i).then(page=>{
+      const viewport=page.getViewport({scale});
+      const canvas=document.createElement("canvas");
+      const ctx=canvas.getContext("2d");
+      canvas.width=viewport.width;
+      canvas.height=viewport.height;
+      container.appendChild(canvas);
+      page.render({canvasContext:ctx,viewport});
+    });
+  }
+}
+
+function zoomIn(){scale+=0.2;renderPages();}
+function zoomOut(){if(scale>0.6){scale-=0.2;renderPages();}}
+function closeViewer(){
+  document.getElementById("viewer").style.display="none";
+  container.innerHTML="";
+}
 </script>
 
 </body>
