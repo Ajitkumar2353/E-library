@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,42 +7,77 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{
-  margin:0;
-}
-.top-bar{
+body{margin:0;}
+.top{
   background:#1a73e8;
   color:white;
-  padding:10px;
-  text-align:center;
+  padding:8px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.top button{
+  padding:6px 10px;
+  border:none;
+  border-radius:4px;
+  cursor:pointer;
+}
+.viewer-wrap{
+  width:100%;
+  height:calc(100vh - 50px);
+  overflow:auto;
 }
 iframe{
   width:100%;
-  height:calc(100vh - 50px);
+  height:100%;
   border:none;
+  transform-origin: 0 0;
 }
 </style>
 </head>
 
 <body>
 
-<div class="top-bar">
-  <a href="index.html" style="color:white;text-decoration:none;">⬅ Back</a>
+<div class="top">
+  <button onclick="zoomOut()">➖</button>
+  <button onclick="zoomIn()">➕</button>
+  <button onclick="refreshPDF()">🔄</button>
+  <button onclick="goBack()">⬅ Back</button>
 </div>
 
-<iframe id="pdfFrame"></iframe>
+<div class="viewer-wrap">
+  <iframe id="pdfFrame"></iframe>
+</div>
 
 <script>
-// Get FILE_ID from URL
-const params = new URLSearchParams(window.location.search);
-const fileId = params.get("id");
+const params=new URLSearchParams(window.location.search);
+const id=params.get("id");
 
-// Load PDF in Drive Viewer
-if(fileId){
-  document.getElementById("pdfFrame").src =
-    "https://drive.google.com/file/d/" + fileId + "/preview";
-}else{
-  document.body.innerHTML = "PDF not found";
+const frame=document.getElementById("pdfFrame");
+let scale=1;
+
+if(id){
+  frame.src="https://drive.google.com/file/d/"+id+"/preview";
+}
+
+function zoomIn(){
+  scale+=0.1;
+  frame.style.transform="scale("+scale+")";
+}
+
+function zoomOut(){
+  if(scale>0.6){
+    scale-=0.1;
+    frame.style.transform="scale("+scale+")";
+  }
+}
+
+function refreshPDF(){
+  frame.src = frame.src;
+}
+
+function goBack(){
+  window.location.href="index.html";
 }
 </script>
 
